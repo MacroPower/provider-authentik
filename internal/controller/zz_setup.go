@@ -9,7 +9,8 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	resource "github.com/MacroPower/provider-authentik/internal/controller/null/resource"
+	application "github.com/MacroPower/provider-authentik/internal/controller/application/application"
+	provideroauth2 "github.com/MacroPower/provider-authentik/internal/controller/application/provideroauth2"
 	providerconfig "github.com/MacroPower/provider-authentik/internal/controller/providerconfig"
 )
 
@@ -17,7 +18,8 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		resource.Setup,
+		application.Setup,
+		provideroauth2.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

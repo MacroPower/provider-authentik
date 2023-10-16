@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: resources.null.authentik.upbound.io
+  name: applications.application.authentik.crossplane.io
 spec:
-  group: null.authentik.upbound.io
+  group: application.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: Resource
-    listKind: ResourceList
-    plural: resources
-    singular: resource
+    kind: Application
+    listKind: ApplicationList
+    plural: applications
+    singular: application
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API. <no value>
+        description: Application is the Schema for the Applications API. <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ResourceSpec defines the desired state of Resource
+            description: ApplicationSpec defines the desired state of Application
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,13 +67,35 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  triggers:
-                    additionalProperties:
-                      type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                  backchannelProviders:
+                    items:
+                      type: number
+                    type: array
+                  group:
+                    type: string
+                  metaDescription:
+                    type: string
+                  metaIcon:
+                    type: string
+                  metaLaunchUrl:
+                    type: string
+                  metaPublisher:
+                    type: string
+                  name:
+                    type: string
+                  openInNewTab:
+                    description: Defaults to `false`.
+                    type: boolean
+                  policyEngineMode:
+                    description: Defaults to `any`.
+                    type: string
+                  protocolProvider:
+                    type: number
+                  slug:
+                    type: string
+                  uuid:
+                    description: Generated.
+                    type: string
                 type: object
               managementPolicy:
                 default: FullControl
@@ -261,20 +283,47 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: slug is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.slug)
           status:
-            description: ResourceStatus defines the observed state of Resource.
+            description: ApplicationStatus defines the observed state of Application.
             properties:
               atProvider:
                 properties:
+                  backchannelProviders:
+                    items:
+                      type: number
+                    type: array
+                  group:
+                    type: string
                   id:
                     type: string
-                  triggers:
-                    additionalProperties:
-                      type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                  metaDescription:
+                    type: string
+                  metaIcon:
+                    type: string
+                  metaLaunchUrl:
+                    type: string
+                  metaPublisher:
+                    type: string
+                  name:
+                    type: string
+                  openInNewTab:
+                    description: Defaults to `false`.
+                    type: boolean
+                  policyEngineMode:
+                    description: Defaults to `any`.
+                    type: string
+                  protocolProvider:
+                    type: number
+                  slug:
+                    type: string
+                  uuid:
+                    description: Generated.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

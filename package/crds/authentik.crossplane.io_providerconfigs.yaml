@@ -5,9 +5,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: providerconfigs.authentik.upbound.io
+  name: providerconfigs.authentik.crossplane.io
 spec:
-  group: authentik.upbound.io
+  group: authentik.crossplane.io
   names:
     categories:
     - crossplane

@@ -1,0 +1,11 @@
+apiVersion: application.authentik.crossplane.io/v1alpha1
+kind: ProviderOAuth2
+metadata:
+  name: hello-crossplane
+spec:
+  forProvider:
+    name: upbound
+    clientId: upjet-provider-template
+    authorizationFlow: fb3e7823-abc6-4d19-9552-ce9120f7c840
+  providerConfigRef:
+    name: default
