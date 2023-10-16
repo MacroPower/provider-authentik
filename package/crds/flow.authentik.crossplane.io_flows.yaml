@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: provideroauth2s.application.authentik.crossplane.io
+  name: flows.flow.authentik.crossplane.io
 spec:
-  group: application.authentik.crossplane.io
+  group: flow.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: ProviderOAuth2
-    listKind: ProviderOAuth2List
-    plural: provideroauth2s
-    singular: provideroauth2
+    kind: Flow
+    listKind: FlowList
+    plural: flows
+    singular: flow
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ProviderOAuth2 is the Schema for the ProviderOAuth2s API.
+        description: Flow is the Schema for the Flows API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ProviderOAuth2Spec defines the desired state of ProviderOAuth2
+            description: FlowSpec defines the desired state of Flow
             properties:
               deletionPolicy:
                 default: Delete
@@ -66,151 +66,38 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  accessCodeValidity:
-                    description: (String) Defaults to minutes=1. Defaults to `minutes=1`.
+                  authentication:
+                    description: (String) Defaults to none. Defaults to `none`.
                     type: string
-                  accessTokenValidity:
-                    description: (String) Defaults to minutes=10. Defaults to `minutes=10`.
+                  background:
+                    description: (String) Optional URL to an image which will be used
+                      as the background during the flow. Optional URL to an image
+                      which will be used as the background during the flow.
                     type: string
-                  authenticationFlow:
-                    description: (String)
-                    type: string
-                  authorizationFlow:
-                    description: (String)
-                    type: string
-                  authorizationFlowRef:
-                    description: Reference to a Flow in flow to populate authorizationFlow.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  authorizationFlowSelector:
-                    description: Selector for a Flow in flow to populate authorizationFlow.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  clientId:
-                    description: (String)
-                    type: string
-                  clientSecretSecretRef:
-                    description: (String, Sensitive) Generated. Generated.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  clientType:
-                    description: (String) Defaults to confidential. Defaults to `confidential`.
-                    type: string
-                  includeClaimsInIdToken:
+                  compatibilityMode:
                     description: (Boolean) Defaults to true. Defaults to `true`.
                     type: boolean
-                  issuerMode:
-                    description: (String) Defaults to per_provider. Defaults to `per_provider`.
+                  deniedAction:
+                    description: (String) Defaults to message_continue. Defaults to
+                      `message_continue`.
                     type: string
-                  jwksSources:
-                    description: (List of String) JWTs issued by keys configured in
-                      any of the selected sources can be used to authenticate on behalf
-                      of this provider. JWTs issued by keys configured in any of the
-                      selected sources can be used to authenticate on behalf of this
-                      provider.
-                    items:
-                      type: string
-                    type: array
+                  designation:
+                    description: (String)
+                    type: string
+                  layout:
+                    description: (String) Defaults to stacked. Defaults to `stacked`.
+                    type: string
                   name:
                     description: (String)
                     type: string
-                  propertyMappings:
-                    description: (List of String)
-                    items:
-                      type: string
-                    type: array
-                  redirectUris:
-                    description: (List of String)
-                    items:
-                      type: string
-                    type: array
-                  refreshTokenValidity:
-                    description: (String) Defaults to days=30. Defaults to `days=30`.
+                  policyEngineMode:
+                    description: (String) Defaults to any. Defaults to `any`.
                     type: string
-                  signingKey:
+                  slug:
                     description: (String)
                     type: string
-                  subMode:
-                    description: (String) Defaults to hashed_user_id. Defaults to
-                      `hashed_user_id`.
+                  title:
+                    description: (String)
                     type: string
                 type: object
               initProvider:
@@ -226,58 +113,38 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  accessCodeValidity:
-                    description: (String) Defaults to minutes=1. Defaults to `minutes=1`.
+                  authentication:
+                    description: (String) Defaults to none. Defaults to `none`.
                     type: string
-                  accessTokenValidity:
-                    description: (String) Defaults to minutes=10. Defaults to `minutes=10`.
+                  background:
+                    description: (String) Optional URL to an image which will be used
+                      as the background during the flow. Optional URL to an image
+                      which will be used as the background during the flow.
                     type: string
-                  authenticationFlow:
-                    description: (String)
-                    type: string
-                  clientId:
-                    description: (String)
-                    type: string
-                  clientType:
-                    description: (String) Defaults to confidential. Defaults to `confidential`.
-                    type: string
-                  includeClaimsInIdToken:
+                  compatibilityMode:
                     description: (Boolean) Defaults to true. Defaults to `true`.
                     type: boolean
-                  issuerMode:
-                    description: (String) Defaults to per_provider. Defaults to `per_provider`.
+                  deniedAction:
+                    description: (String) Defaults to message_continue. Defaults to
+                      `message_continue`.
                     type: string
-                  jwksSources:
-                    description: (List of String) JWTs issued by keys configured in
-                      any of the selected sources can be used to authenticate on behalf
-                      of this provider. JWTs issued by keys configured in any of the
-                      selected sources can be used to authenticate on behalf of this
-                      provider.
-                    items:
-                      type: string
-                    type: array
+                  designation:
+                    description: (String)
+                    type: string
+                  layout:
+                    description: (String) Defaults to stacked. Defaults to `stacked`.
+                    type: string
                   name:
                     description: (String)
                     type: string
-                  propertyMappings:
-                    description: (List of String)
-                    items:
-                      type: string
-                    type: array
-                  redirectUris:
-                    description: (List of String)
-                    items:
-                      type: string
-                    type: array
-                  refreshTokenValidity:
-                    description: (String) Defaults to days=30. Defaults to `days=30`.
+                  policyEngineMode:
+                    description: (String) Defaults to any. Defaults to `any`.
                     type: string
-                  signingKey:
+                  slug:
                     description: (String)
                     type: string
-                  subMode:
-                    description: (String) Defaults to hashed_user_id. Defaults to
-                      `hashed_user_id`.
+                  title:
+                    description: (String)
                     type: string
                 type: object
               managementPolicies:
@@ -442,77 +309,65 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.clientId is a required parameter
+            - message: spec.forProvider.designation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientId)
-                || (has(self.initProvider) && has(self.initProvider.clientId))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.designation)
+                || (has(self.initProvider) && has(self.initProvider.designation))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.slug is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.slug)
+                || (has(self.initProvider) && has(self.initProvider.slug))'
+            - message: spec.forProvider.title is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.title)
+                || (has(self.initProvider) && has(self.initProvider.title))'
           status:
-            description: ProviderOAuth2Status defines the observed state of ProviderOAuth2.
+            description: FlowStatus defines the observed state of Flow.
             properties:
               atProvider:
                 properties:
-                  accessCodeValidity:
-                    description: (String) Defaults to minutes=1. Defaults to `minutes=1`.
+                  authentication:
+                    description: (String) Defaults to none. Defaults to `none`.
                     type: string
-                  accessTokenValidity:
-                    description: (String) Defaults to minutes=10. Defaults to `minutes=10`.
+                  background:
+                    description: (String) Optional URL to an image which will be used
+                      as the background during the flow. Optional URL to an image
+                      which will be used as the background during the flow.
                     type: string
-                  authenticationFlow:
+                  compatibilityMode:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  deniedAction:
+                    description: (String) Defaults to message_continue. Defaults to
+                      `message_continue`.
+                    type: string
+                  designation:
                     description: (String)
-                    type: string
-                  authorizationFlow:
-                    description: (String)
-                    type: string
-                  clientId:
-                    description: (String)
-                    type: string
-                  clientType:
-                    description: (String) Defaults to confidential. Defaults to `confidential`.
                     type: string
                   id:
                     description: (String) The ID of this resource.
                     type: string
-                  includeClaimsInIdToken:
-                    description: (Boolean) Defaults to true. Defaults to `true`.
-                    type: boolean
-                  issuerMode:
-                    description: (String) Defaults to per_provider. Defaults to `per_provider`.
+                  layout:
+                    description: (String) Defaults to stacked. Defaults to `stacked`.
                     type: string
-                  jwksSources:
-                    description: (List of String) JWTs issued by keys configured in
-                      any of the selected sources can be used to authenticate on behalf
-                      of this provider. JWTs issued by keys configured in any of the
-                      selected sources can be used to authenticate on behalf of this
-                      provider.
-                    items:
-                      type: string
-                    type: array
                   name:
                     description: (String)
                     type: string
-                  propertyMappings:
-                    description: (List of String)
-                    items:
-                      type: string
-                    type: array
-                  redirectUris:
-                    description: (List of String)
-                    items:
-                      type: string
-                    type: array
-                  refreshTokenValidity:
-                    description: (String) Defaults to days=30. Defaults to `days=30`.
+                  policyEngineMode:
+                    description: (String) Defaults to any. Defaults to `any`.
                     type: string
-                  signingKey:
+                  slug:
                     description: (String)
                     type: string
-                  subMode:
-                    description: (String) Defaults to hashed_user_id. Defaults to
-                      `hashed_user_id`.
+                  title:
+                    description: (String)
+                    type: string
+                  uuid:
+                    description: (String) Generated. Generated.
                     type: string
                 type: object
               conditions:

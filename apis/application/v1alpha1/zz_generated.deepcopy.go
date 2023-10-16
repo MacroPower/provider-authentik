@@ -400,11 +400,6 @@ func (in *ProviderOAuth2InitParameters) DeepCopyInto(out *ProviderOAuth2InitPara
 		*out = new(string)
 		**out = **in
 	}
-	if in.AuthorizationFlow != nil {
-		in, out := &in.AuthorizationFlow, &out.AuthorizationFlow
-		*out = new(string)
-		**out = **in
-	}
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
@@ -657,6 +652,16 @@ func (in *ProviderOAuth2Parameters) DeepCopyInto(out *ProviderOAuth2Parameters) 
 		in, out := &in.AuthorizationFlow, &out.AuthorizationFlow
 		*out = new(string)
 		**out = **in
+	}
+	if in.AuthorizationFlowRef != nil {
+		in, out := &in.AuthorizationFlowRef, &out.AuthorizationFlowRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AuthorizationFlowSelector != nil {
+		in, out := &in.AuthorizationFlowSelector, &out.AuthorizationFlowSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID

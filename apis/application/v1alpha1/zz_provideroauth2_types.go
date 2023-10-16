@@ -27,9 +27,6 @@ type ProviderOAuth2InitParameters struct {
 	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
 
 	// (String)
-	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
-
-	// (String)
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// (String) Defaults to confidential.
@@ -145,8 +142,18 @@ type ProviderOAuth2Parameters struct {
 	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
 
 	// (String)
+	// +crossplane:generate:reference:type=github.com/MacroPower/provider-authentik/apis/flow/v1alpha1.Flow
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("uuid",true)
 	// +kubebuilder:validation:Optional
 	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
+
+	// Reference to a Flow in flow to populate authorizationFlow.
+	// +kubebuilder:validation:Optional
+	AuthorizationFlowRef *v1.Reference `json:"authorizationFlowRef,omitempty" tf:"-"`
+
+	// Selector for a Flow in flow to populate authorizationFlow.
+	// +kubebuilder:validation:Optional
+	AuthorizationFlowSelector *v1.Selector `json:"authorizationFlowSelector,omitempty" tf:"-"`
 
 	// (String)
 	// +kubebuilder:validation:Optional
@@ -240,7 +247,6 @@ type ProviderOAuth2Status struct {
 type ProviderOAuth2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationFlow) || (has(self.initProvider) && has(self.initProvider.authorizationFlow))",message="spec.forProvider.authorizationFlow is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || (has(self.initProvider) && has(self.initProvider.clientId))",message="spec.forProvider.clientId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   ProviderOAuth2Spec   `json:"spec"`

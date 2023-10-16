@@ -14,5 +14,10 @@ func Configure(p *config.Provider) {
 		// this resource, which would be "github"
 		r.ShortGroup = "application"
 		r.Kind = "ProviderOAuth2"
+
+		r.References["authorization_flow"] = config.Reference{
+			Type:      "github.com/MacroPower/provider-authentik/apis/flow/v1alpha1.Flow",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("uuid",true)`,
+		}
 	})
 }

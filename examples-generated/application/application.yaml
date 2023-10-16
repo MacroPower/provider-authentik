@@ -24,7 +24,9 @@ metadata:
   name: name
 spec:
   forProvider:
-    authorizationFlow: ${data.authentik_flow.default-authorization-flow.id}
+    authorizationFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
     clientId: example-app
     clientSecretSecretRef:
       key: example-key

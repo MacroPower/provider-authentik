@@ -5,8 +5,8 @@ metadata:
 spec:
   forProvider:
     name: upbound
-    clientId: upjet-provider-template
+    clientId: foo-bar-123
     authorizationFlowRef:
-      name: default-provider-authorization-explicit-consent
+      name: my-authorization
   providerConfigRef:
     name: default
