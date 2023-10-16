@@ -1,0 +1,28 @@
+apiVersion: application.authentik.crossplane.io/v1alpha1
+kind: ProviderOAuth2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: application/v1alpha1/provideroauth2
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    clientId: grafana
+    name: grafana
+
+---
+
+apiVersion: application.authentik.crossplane.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: application/v1alpha1/provideroauth2
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    name: test app
+    protocolProvider: ${authentik_provider_oauth2.name.id}
+    slug: test-app

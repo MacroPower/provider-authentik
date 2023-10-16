@@ -13,104 +13,192 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ProviderOAuth2Observation struct {
+type ProviderOAuth2InitParameters struct {
 
+	// (String) Defaults to minutes=1.
 	// Defaults to `minutes=1`.
 	AccessCodeValidity *string `json:"accessCodeValidity,omitempty" tf:"access_code_validity,omitempty"`
 
+	// (String) Defaults to minutes=10.
 	// Defaults to `minutes=10`.
 	AccessTokenValidity *string `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
+	// (String)
 	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
 
+	// (String)
 	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
 
+	// (String)
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// (String) Defaults to confidential.
 	// Defaults to `confidential`.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
+	// (Boolean) Defaults to true.
 	// Defaults to `true`.
 	IncludeClaimsInIDToken *bool `json:"includeClaimsInIdToken,omitempty" tf:"include_claims_in_id_token,omitempty"`
 
+	// (String) Defaults to per_provider.
 	// Defaults to `per_provider`.
 	IssuerMode *string `json:"issuerMode,omitempty" tf:"issuer_mode,omitempty"`
 
+	// (List of String) JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources []*string `json:"jwksSources,omitempty" tf:"jwks_sources,omitempty"`
 
+	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (List of String)
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
 
+	// (List of String)
 	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
 
+	// (String) Defaults to days=30.
 	// Defaults to `days=30`.
 	RefreshTokenValidity *string `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
+	// (String)
 	SigningKey *string `json:"signingKey,omitempty" tf:"signing_key,omitempty"`
 
+	// (String) Defaults to hashed_user_id.
+	// Defaults to `hashed_user_id`.
+	SubMode *string `json:"subMode,omitempty" tf:"sub_mode,omitempty"`
+}
+
+type ProviderOAuth2Observation struct {
+
+	// (String) Defaults to minutes=1.
+	// Defaults to `minutes=1`.
+	AccessCodeValidity *string `json:"accessCodeValidity,omitempty" tf:"access_code_validity,omitempty"`
+
+	// (String) Defaults to minutes=10.
+	// Defaults to `minutes=10`.
+	AccessTokenValidity *string `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
+
+	// (String)
+	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
+
+	// (String)
+	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
+
+	// (String)
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// (String) Defaults to confidential.
+	// Defaults to `confidential`.
+	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
+
+	// (String) The ID of this resource.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// (Boolean) Defaults to true.
+	// Defaults to `true`.
+	IncludeClaimsInIDToken *bool `json:"includeClaimsInIdToken,omitempty" tf:"include_claims_in_id_token,omitempty"`
+
+	// (String) Defaults to per_provider.
+	// Defaults to `per_provider`.
+	IssuerMode *string `json:"issuerMode,omitempty" tf:"issuer_mode,omitempty"`
+
+	// (List of String) JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
+	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
+	JwksSources []*string `json:"jwksSources,omitempty" tf:"jwks_sources,omitempty"`
+
+	// (String)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (List of String)
+	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
+
+	// (List of String)
+	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
+
+	// (String) Defaults to days=30.
+	// Defaults to `days=30`.
+	RefreshTokenValidity *string `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
+
+	// (String)
+	SigningKey *string `json:"signingKey,omitempty" tf:"signing_key,omitempty"`
+
+	// (String) Defaults to hashed_user_id.
 	// Defaults to `hashed_user_id`.
 	SubMode *string `json:"subMode,omitempty" tf:"sub_mode,omitempty"`
 }
 
 type ProviderOAuth2Parameters struct {
 
+	// (String) Defaults to minutes=1.
 	// Defaults to `minutes=1`.
 	// +kubebuilder:validation:Optional
 	AccessCodeValidity *string `json:"accessCodeValidity,omitempty" tf:"access_code_validity,omitempty"`
 
+	// (String) Defaults to minutes=10.
 	// Defaults to `minutes=10`.
 	// +kubebuilder:validation:Optional
 	AccessTokenValidity *string `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// (String, Sensitive) Generated.
 	// Generated.
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
+	// (String) Defaults to confidential.
 	// Defaults to `confidential`.
 	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
+	// (Boolean) Defaults to true.
 	// Defaults to `true`.
 	// +kubebuilder:validation:Optional
 	IncludeClaimsInIDToken *bool `json:"includeClaimsInIdToken,omitempty" tf:"include_claims_in_id_token,omitempty"`
 
+	// (String) Defaults to per_provider.
 	// Defaults to `per_provider`.
 	// +kubebuilder:validation:Optional
 	IssuerMode *string `json:"issuerMode,omitempty" tf:"issuer_mode,omitempty"`
 
+	// (List of String) JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// +kubebuilder:validation:Optional
 	JwksSources []*string `json:"jwksSources,omitempty" tf:"jwks_sources,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
 	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
 
+	// (String) Defaults to days=30.
 	// Defaults to `days=30`.
 	// +kubebuilder:validation:Optional
 	RefreshTokenValidity *string `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	SigningKey *string `json:"signingKey,omitempty" tf:"signing_key,omitempty"`
 
+	// (String) Defaults to hashed_user_id.
 	// Defaults to `hashed_user_id`.
 	// +kubebuilder:validation:Optional
 	SubMode *string `json:"subMode,omitempty" tf:"sub_mode,omitempty"`
@@ -120,6 +208,18 @@ type ProviderOAuth2Parameters struct {
 type ProviderOAuth2Spec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProviderOAuth2Parameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ProviderOAuth2InitParameters `json:"initProvider,omitempty"`
 }
 
 // ProviderOAuth2Status defines the observed state of ProviderOAuth2.
@@ -130,7 +230,7 @@ type ProviderOAuth2Status struct {
 
 // +kubebuilder:object:root=true
 
-// ProviderOAuth2 is the Schema for the ProviderOAuth2s API. <no value>
+// ProviderOAuth2 is the Schema for the ProviderOAuth2s API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -140,9 +240,9 @@ type ProviderOAuth2Status struct {
 type ProviderOAuth2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorizationFlow)",message="authorizationFlow is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientId)",message="clientId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationFlow) || (has(self.initProvider) && has(self.initProvider.authorizationFlow))",message="spec.forProvider.authorizationFlow is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || (has(self.initProvider) && has(self.initProvider.clientId))",message="spec.forProvider.clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   ProviderOAuth2Spec   `json:"spec"`
 	Status ProviderOAuth2Status `json:"status,omitempty"`
 }
