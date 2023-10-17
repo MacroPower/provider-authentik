@@ -1,0 +1,24 @@
+apiVersion: provider.authentik.crossplane.io/v1alpha1
+kind: Proxy
+metadata:
+  name: hello-crossplane
+spec:
+  forProvider:
+    name: upbound
+    internalHost: "http://foo.bar.baz"
+    externalHost: "http://internal.service"
+    authorizationFlowRef:
+      name: my-authorization
+  providerConfigRef:
+    name: default
+
+---
+apiVersion: application.authentik.crossplane.io/v1alpha1
+kind: Application
+metadata:
+  name: example-app
+spec:
+  forProvider:
+    name: example.app
+    protocolProviderRef:
+      name: hello-crossplane

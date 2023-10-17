@@ -9,13 +9,14 @@ metadata:
 spec:
   forProvider:
     name: example-app
-    protocolProvider: ${authentik_provider_oauth2.name.id}
-    slug: example-app
+    protocolProviderSelector:
+      matchLabels:
+        testing.upbound.io/example-name: name
 
 ---
 
-apiVersion: application.authentik.crossplane.io/v1alpha1
-kind: ProviderOAuth2
+apiVersion: provider.authentik.crossplane.io/v1alpha1
+kind: OAuth2
 metadata:
   annotations:
     meta.upbound.io/example-id: application/v1alpha1/application

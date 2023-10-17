@@ -93,9 +93,6 @@ spec:
                   policyEngineMode:
                     description: (String) Defaults to any. Defaults to `any`.
                     type: string
-                  slug:
-                    description: (String)
-                    type: string
                   title:
                     description: (String)
                     type: string
@@ -139,9 +136,6 @@ spec:
                     type: string
                   policyEngineMode:
                     description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  slug:
-                    description: (String)
                     type: string
                   title:
                     description: (String)
@@ -317,10 +311,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.slug is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.slug)
-                || (has(self.initProvider) && has(self.initProvider.slug))'
             - message: spec.forProvider.title is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.title)
@@ -359,9 +349,6 @@ spec:
                     type: string
                   policyEngineMode:
                     description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  slug:
-                    description: (String)
                     type: string
                   title:
                     description: (String)

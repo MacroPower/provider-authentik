@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: applications.application.authentik.crossplane.io
+  name: radii.provider.authentik.crossplane.io
 spec:
-  group: application.authentik.crossplane.io
+  group: provider.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: Application
-    listKind: ApplicationList
-    plural: applications
-    singular: application
+    kind: Radius
+    listKind: RadiusList
+    plural: radii
+    singular: radius
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Application is the Schema for the Applications API.
+        description: Radius is the Schema for the Radiuss API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ApplicationSpec defines the desired state of Application
+            description: RadiusSpec defines the desired state of Radius
             properties:
               deletionPolicy:
                 default: Delete
@@ -66,40 +66,11 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  authorizationFlow:
                     description: (String)
                     type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
-                    type: string
-                  name:
-                    description: (String)
-                    type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  protocolProviderRef:
-                    description: Reference to a Proxy in provider to populate protocolProvider.
+                  authorizationFlowRef:
+                    description: Reference to a Flow in flow to populate authorizationFlow.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,8 +103,8 @@ spec:
                     required:
                     - name
                     type: object
-                  protocolProviderSelector:
-                    description: Selector for a Proxy in provider to populate protocolProvider.
+                  authorizationFlowSelector:
+                    description: Selector for a Flow in flow to populate authorizationFlow.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -171,9 +142,30 @@ spec:
                             type: string
                         type: object
                     type: object
-                  uuid:
-                    description: (String) Generated. Generated.
+                  clientNetworks:
+                    description: (String) Defaults to 0.0.0.0/0, ::/0. Defaults to
+                      `0.0.0.0/0, ::/0`.
                     type: string
+                  name:
+                    description: (String)
+                    type: string
+                  sharedSecretSecretRef:
+                    description: (String, Sensitive)
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -188,37 +180,12 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
-                    description: (String)
-                    type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
+                  clientNetworks:
+                    description: (String) Defaults to 0.0.0.0/0, ::/0. Defaults to
+                      `0.0.0.0/0, ::/0`.
                     type: string
                   name:
                     description: (String)
-                    type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  uuid:
-                    description: (String) Generated. Generated.
                     type: string
                 type: object
               managementPolicies:
@@ -387,48 +354,26 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.sharedSecretSecretRef is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedSecretSecretRef)'
           status:
-            description: ApplicationStatus defines the observed state of Application.
+            description: RadiusStatus defines the observed state of Radius.
             properties:
               atProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  authorizationFlow:
                     description: (String)
+                    type: string
+                  clientNetworks:
+                    description: (String) Defaults to 0.0.0.0/0, ::/0. Defaults to
+                      `0.0.0.0/0, ::/0`.
                     type: string
                   id:
                     description: (String) The ID of this resource.
                     type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
-                    type: string
                   name:
                     description: (String)
-                    type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  uuid:
-                    description: (String) Generated. Generated.
                     type: string
                 type: object
               conditions:

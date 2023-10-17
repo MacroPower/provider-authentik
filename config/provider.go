@@ -12,6 +12,7 @@ import (
 
 	"github.com/MacroPower/provider-authentik/config/application"
 	"github.com/MacroPower/provider-authentik/config/flow"
+	"github.com/MacroPower/provider-authentik/config/provider"
 )
 
 const (
@@ -39,6 +40,7 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		application.Configure,
 		flow.Configure,
+		provider.Configure,
 	} {
 		configure(pc)
 	}

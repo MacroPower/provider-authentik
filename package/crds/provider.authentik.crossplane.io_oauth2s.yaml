@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: provideroauth2s.application.authentik.crossplane.io
+  name: oauth2s.provider.authentik.crossplane.io
 spec:
-  group: application.authentik.crossplane.io
+  group: provider.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: ProviderOAuth2
-    listKind: ProviderOAuth2List
-    plural: provideroauth2s
-    singular: provideroauth2
+    kind: OAuth2
+    listKind: OAuth2List
+    plural: oauth2s
+    singular: oauth2
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ProviderOAuth2 is the Schema for the ProviderOAuth2s API.
+        description: OAuth2 is the Schema for the OAuth2s API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ProviderOAuth2Spec defines the desired state of ProviderOAuth2
+            description: OAuth2Spec defines the desired state of OAuth2
             properties:
               deletionPolicy:
                 default: Delete
@@ -451,7 +451,7 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
           status:
-            description: ProviderOAuth2Status defines the observed state of ProviderOAuth2.
+            description: OAuth2Status defines the observed state of OAuth2.
             properties:
               atProvider:
                 properties:

@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: applications.application.authentik.crossplane.io
+  name: proxies.provider.authentik.crossplane.io
 spec:
-  group: application.authentik.crossplane.io
+  group: provider.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: Application
-    listKind: ApplicationList
-    plural: applications
-    singular: application
+    kind: Proxy
+    listKind: ProxyList
+    plural: proxies
+    singular: proxy
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Application is the Schema for the Applications API.
+        description: Proxy is the Schema for the Proxys API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ApplicationSpec defines the desired state of Application
+            description: ProxySpec defines the desired state of Proxy
             properties:
               deletionPolicy:
                 default: Delete
@@ -66,40 +66,17 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  accessTokenValidity:
+                    description: (String) Defaults to minutes=10. Defaults to `minutes=10`.
+                    type: string
+                  authenticationFlow:
                     description: (String)
                     type: string
-                  metaDescription:
+                  authorizationFlow:
                     description: (String)
                     type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
-                    type: string
-                  name:
-                    description: (String)
-                    type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  protocolProviderRef:
-                    description: Reference to a Proxy in provider to populate protocolProvider.
+                  authorizationFlowRef:
+                    description: Reference to a Flow in flow to populate authorizationFlow.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,8 +109,8 @@ spec:
                     required:
                     - name
                     type: object
-                  protocolProviderSelector:
-                    description: Selector for a Proxy in provider to populate protocolProvider.
+                  authorizationFlowSelector:
+                    description: Selector for a Flow in flow to populate authorizationFlow.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -171,8 +148,55 @@ spec:
                             type: string
                         type: object
                     type: object
-                  uuid:
-                    description: (String) Generated. Generated.
+                  basicAuthEnabled:
+                    description: (Boolean) Defaults to false. Defaults to `false`.
+                    type: boolean
+                  basicAuthPasswordAttribute:
+                    description: (String)
+                    type: string
+                  basicAuthUsernameAttribute:
+                    description: (String)
+                    type: string
+                  cookieDomain:
+                    description: (String)
+                    type: string
+                  externalHost:
+                    description: (String)
+                    type: string
+                  interceptHeaderAuth:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  internalHost:
+                    description: (String)
+                    type: string
+                  internalHostSslValidation:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  jwksSources:
+                    description: (List of String) JWTs issued by keys configured in
+                      any of the selected sources can be used to authenticate on behalf
+                      of this provider. JWTs issued by keys configured in any of the
+                      selected sources can be used to authenticate on behalf of this
+                      provider.
+                    items:
+                      type: string
+                    type: array
+                  mode:
+                    description: (String) Defaults to proxy. Defaults to `proxy`.
+                    type: string
+                  name:
+                    description: (String)
+                    type: string
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  refreshTokenValidity:
+                    description: (String) Defaults to days=30. Defaults to `days=30`.
+                    type: string
+                  skipPathRegex:
+                    description: (String)
                     type: string
                 type: object
               initProvider:
@@ -188,37 +212,61 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
+                  accessTokenValidity:
+                    description: (String) Defaults to minutes=10. Defaults to `minutes=10`.
+                    type: string
+                  authenticationFlow:
+                    description: (String)
+                    type: string
+                  basicAuthEnabled:
+                    description: (Boolean) Defaults to false. Defaults to `false`.
+                    type: boolean
+                  basicAuthPasswordAttribute:
+                    description: (String)
+                    type: string
+                  basicAuthUsernameAttribute:
+                    description: (String)
+                    type: string
+                  cookieDomain:
+                    description: (String)
+                    type: string
+                  externalHost:
+                    description: (String)
+                    type: string
+                  interceptHeaderAuth:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  internalHost:
+                    description: (String)
+                    type: string
+                  internalHostSslValidation:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  jwksSources:
+                    description: (List of String) JWTs issued by keys configured in
+                      any of the selected sources can be used to authenticate on behalf
+                      of this provider. JWTs issued by keys configured in any of the
+                      selected sources can be used to authenticate on behalf of this
+                      provider.
                     items:
-                      type: number
+                      type: string
                     type: array
-                  group:
-                    description: (String)
-                    type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
+                  mode:
+                    description: (String) Defaults to proxy. Defaults to `proxy`.
                     type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  refreshTokenValidity:
+                    description: (String) Defaults to days=30. Defaults to `days=30`.
                     type: string
-                  uuid:
-                    description: (String) Generated. Generated.
+                  skipPathRegex:
+                    description: (String)
                     type: string
                 type: object
               managementPolicies:
@@ -383,52 +431,83 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
+            - message: spec.forProvider.externalHost is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.externalHost)
+                || (has(self.initProvider) && has(self.initProvider.externalHost))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
           status:
-            description: ApplicationStatus defines the observed state of Application.
+            description: ProxyStatus defines the observed state of Proxy.
             properties:
               atProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  accessTokenValidity:
+                    description: (String) Defaults to minutes=10. Defaults to `minutes=10`.
+                    type: string
+                  authenticationFlow:
+                    description: (String)
+                    type: string
+                  authorizationFlow:
+                    description: (String)
+                    type: string
+                  basicAuthEnabled:
+                    description: (Boolean) Defaults to false. Defaults to `false`.
+                    type: boolean
+                  basicAuthPasswordAttribute:
+                    description: (String)
+                    type: string
+                  basicAuthUsernameAttribute:
+                    description: (String)
+                    type: string
+                  clientId:
+                    description: (String) Generated. Generated.
+                    type: string
+                  cookieDomain:
+                    description: (String)
+                    type: string
+                  externalHost:
                     description: (String)
                     type: string
                   id:
                     description: (String) The ID of this resource.
                     type: string
-                  metaDescription:
+                  interceptHeaderAuth:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  internalHost:
                     description: (String)
                     type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
+                  internalHostSslValidation:
+                    description: (Boolean) Defaults to true. Defaults to `true`.
+                    type: boolean
+                  jwksSources:
+                    description: (List of String) JWTs issued by keys configured in
+                      any of the selected sources can be used to authenticate on behalf
+                      of this provider. JWTs issued by keys configured in any of the
+                      selected sources can be used to authenticate on behalf of this
+                      provider.
+                    items:
+                      type: string
+                    type: array
+                  mode:
+                    description: (String) Defaults to proxy. Defaults to `proxy`.
                     type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  refreshTokenValidity:
+                    description: (String) Defaults to days=30. Defaults to `days=30`.
                     type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  uuid:
-                    description: (String) Generated. Generated.
+                  skipPathRegex:
+                    description: (String)
                     type: string
                 type: object
               conditions:

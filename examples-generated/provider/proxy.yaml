@@ -1,0 +1,33 @@
+apiVersion: provider.authentik.crossplane.io/v1alpha1
+kind: Proxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: provider/v1alpha1/proxy
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    authorizationFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    externalHost: http://internal.service
+    internalHost: http://foo.bar.baz
+    name: test-app
+
+---
+
+apiVersion: application.authentik.crossplane.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: provider/v1alpha1/proxy
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    name: test-app
+    protocolProviderSelector:
+      matchLabels:
+        testing.upbound.io/example-name: name

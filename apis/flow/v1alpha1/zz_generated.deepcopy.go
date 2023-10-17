@@ -82,11 +82,6 @@ func (in *FlowInitParameters) DeepCopyInto(out *FlowInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Slug != nil {
-		in, out := &in.Slug, &out.Slug
-		*out = new(string)
-		**out = **in
-	}
 	if in.Title != nil {
 		in, out := &in.Title, &out.Title
 		*out = new(string)
@@ -184,11 +179,6 @@ func (in *FlowObservation) DeepCopyInto(out *FlowObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Slug != nil {
-		in, out := &in.Slug, &out.Slug
-		*out = new(string)
-		**out = **in
-	}
 	if in.Title != nil {
 		in, out := &in.Title, &out.Title
 		*out = new(string)
@@ -251,11 +241,6 @@ func (in *FlowParameters) DeepCopyInto(out *FlowParameters) {
 	}
 	if in.PolicyEngineMode != nil {
 		in, out := &in.PolicyEngineMode, &out.PolicyEngineMode
-		*out = new(string)
-		**out = **in
-	}
-	if in.Slug != nil {
-		in, out := &in.Slug, &out.Slug
 		*out = new(string)
 		**out = **in
 	}

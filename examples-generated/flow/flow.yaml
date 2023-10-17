@@ -10,5 +10,4 @@ spec:
   forProvider:
     designation: authorization
     name: test-flow
-    slug: test-flow
     title: Test flow

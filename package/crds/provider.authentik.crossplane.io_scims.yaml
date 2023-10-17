@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: applications.application.authentik.crossplane.io
+  name: scims.provider.authentik.crossplane.io
 spec:
-  group: application.authentik.crossplane.io
+  group: provider.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: Application
-    listKind: ApplicationList
-    plural: applications
-    singular: application
+    kind: SCIM
+    listKind: SCIMList
+    plural: scims
+    singular: scim
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Application is the Schema for the Applications API.
+        description: SCIM is the Schema for the SCIMs API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ApplicationSpec defines the desired state of Application
+            description: SCIMSpec defines the desired state of SCIM
             properties:
               deletionPolicy:
                 default: Delete
@@ -66,113 +66,38 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
-                    description: (String)
-                    type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
-                    type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  protocolProviderRef:
-                    description: Reference to a Proxy in provider to populate protocolProvider.
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  propertyMappingsGroup:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  tokenSecretRef:
+                    description: (String, Sensitive)
                     properties:
-                      name:
-                        description: Name of the referenced object.
+                      key:
+                        description: The key to select.
                         type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
                     required:
+                    - key
                     - name
+                    - namespace
                     type: object
-                  protocolProviderSelector:
-                    description: Selector for a Proxy in provider to populate protocolProvider.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  uuid:
-                    description: (String) Generated. Generated.
+                  url:
+                    description: (String)
                     type: string
                 type: object
               initProvider:
@@ -188,37 +113,21 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
-                    description: (String)
-                    type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
-                    type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  uuid:
-                    description: (String) Generated. Generated.
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  propertyMappingsGroup:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  url:
+                    description: (String)
                     type: string
                 type: object
               managementPolicies:
@@ -387,48 +296,36 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.tokenSecretRef is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tokenSecretRef)'
+            - message: spec.forProvider.url is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)
+                || (has(self.initProvider) && has(self.initProvider.url))'
           status:
-            description: ApplicationStatus defines the observed state of Application.
+            description: SCIMStatus defines the observed state of SCIM.
             properties:
               atProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
-                    description: (String)
-                    type: string
                   id:
                     description: (String) The ID of this resource.
-                    type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
                     type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  uuid:
-                    description: (String) Generated. Generated.
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  propertyMappingsGroup:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  url:
+                    description: (String)
                     type: string
                 type: object
               conditions:

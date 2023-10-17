@@ -10,9 +10,16 @@ import "github.com/upbound/upjet/pkg/config"
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"authentik_application":     config.IdentifierFromProvider,
+	"authentik_application": config.ParameterAsIdentifier("slug"),
+
+	"authentik_provider_ldap":   config.IdentifierFromProvider,
 	"authentik_provider_oauth2": config.IdentifierFromProvider,
-	"authentik_flow":            config.IdentifierFromProvider,
+	"authentik_provider_proxy":  config.IdentifierFromProvider,
+	"authentik_provider_radius": config.IdentifierFromProvider,
+	"authentik_provider_saml":   config.IdentifierFromProvider,
+	"authentik_provider_scim":   config.IdentifierFromProvider,
+
+	"authentik_flow": config.ParameterAsIdentifier("slug"),
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

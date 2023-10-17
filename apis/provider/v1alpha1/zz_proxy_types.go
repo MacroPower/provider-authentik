@@ -13,11 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ProviderOAuth2InitParameters struct {
-
-	// (String) Defaults to minutes=1.
-	// Defaults to `minutes=1`.
-	AccessCodeValidity *string `json:"accessCodeValidity,omitempty" tf:"access_code_validity,omitempty"`
+type ProxyInitParameters struct {
 
 	// (String) Defaults to minutes=10.
 	// Defaults to `minutes=10`.
@@ -26,24 +22,40 @@ type ProviderOAuth2InitParameters struct {
 	// (String)
 	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
 
-	// (String)
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	// (Boolean) Defaults to false.
+	// Defaults to `false`.
+	BasicAuthEnabled *bool `json:"basicAuthEnabled,omitempty" tf:"basic_auth_enabled,omitempty"`
 
-	// (String) Defaults to confidential.
-	// Defaults to `confidential`.
-	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
+	// (String)
+	BasicAuthPasswordAttribute *string `json:"basicAuthPasswordAttribute,omitempty" tf:"basic_auth_password_attribute,omitempty"`
+
+	// (String)
+	BasicAuthUsernameAttribute *string `json:"basicAuthUsernameAttribute,omitempty" tf:"basic_auth_username_attribute,omitempty"`
+
+	// (String)
+	CookieDomain *string `json:"cookieDomain,omitempty" tf:"cookie_domain,omitempty"`
+
+	// (String)
+	ExternalHost *string `json:"externalHost,omitempty" tf:"external_host,omitempty"`
 
 	// (Boolean) Defaults to true.
 	// Defaults to `true`.
-	IncludeClaimsInIDToken *bool `json:"includeClaimsInIdToken,omitempty" tf:"include_claims_in_id_token,omitempty"`
+	InterceptHeaderAuth *bool `json:"interceptHeaderAuth,omitempty" tf:"intercept_header_auth,omitempty"`
 
-	// (String) Defaults to per_provider.
-	// Defaults to `per_provider`.
-	IssuerMode *string `json:"issuerMode,omitempty" tf:"issuer_mode,omitempty"`
+	// (String)
+	InternalHost *string `json:"internalHost,omitempty" tf:"internal_host,omitempty"`
+
+	// (Boolean) Defaults to true.
+	// Defaults to `true`.
+	InternalHostSSLValidation *bool `json:"internalHostSslValidation,omitempty" tf:"internal_host_ssl_validation,omitempty"`
 
 	// (List of String) JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources []*string `json:"jwksSources,omitempty" tf:"jwks_sources,omitempty"`
+
+	// (String) Defaults to proxy.
+	// Defaults to `proxy`.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -51,26 +63,15 @@ type ProviderOAuth2InitParameters struct {
 	// (List of String)
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
 
-	// (List of String)
-	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
-
 	// (String) Defaults to days=30.
 	// Defaults to `days=30`.
 	RefreshTokenValidity *string `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
 	// (String)
-	SigningKey *string `json:"signingKey,omitempty" tf:"signing_key,omitempty"`
-
-	// (String) Defaults to hashed_user_id.
-	// Defaults to `hashed_user_id`.
-	SubMode *string `json:"subMode,omitempty" tf:"sub_mode,omitempty"`
+	SkipPathRegex *string `json:"skipPathRegex,omitempty" tf:"skip_path_regex,omitempty"`
 }
 
-type ProviderOAuth2Observation struct {
-
-	// (String) Defaults to minutes=1.
-	// Defaults to `minutes=1`.
-	AccessCodeValidity *string `json:"accessCodeValidity,omitempty" tf:"access_code_validity,omitempty"`
+type ProxyObservation struct {
 
 	// (String) Defaults to minutes=10.
 	// Defaults to `minutes=10`.
@@ -82,27 +83,47 @@ type ProviderOAuth2Observation struct {
 	// (String)
 	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
 
+	// (Boolean) Defaults to false.
+	// Defaults to `false`.
+	BasicAuthEnabled *bool `json:"basicAuthEnabled,omitempty" tf:"basic_auth_enabled,omitempty"`
+
 	// (String)
+	BasicAuthPasswordAttribute *string `json:"basicAuthPasswordAttribute,omitempty" tf:"basic_auth_password_attribute,omitempty"`
+
+	// (String)
+	BasicAuthUsernameAttribute *string `json:"basicAuthUsernameAttribute,omitempty" tf:"basic_auth_username_attribute,omitempty"`
+
+	// (String) Generated.
+	// Generated.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// (String) Defaults to confidential.
-	// Defaults to `confidential`.
-	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
+	// (String)
+	CookieDomain *string `json:"cookieDomain,omitempty" tf:"cookie_domain,omitempty"`
+
+	// (String)
+	ExternalHost *string `json:"externalHost,omitempty" tf:"external_host,omitempty"`
 
 	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Boolean) Defaults to true.
 	// Defaults to `true`.
-	IncludeClaimsInIDToken *bool `json:"includeClaimsInIdToken,omitempty" tf:"include_claims_in_id_token,omitempty"`
+	InterceptHeaderAuth *bool `json:"interceptHeaderAuth,omitempty" tf:"intercept_header_auth,omitempty"`
 
-	// (String) Defaults to per_provider.
-	// Defaults to `per_provider`.
-	IssuerMode *string `json:"issuerMode,omitempty" tf:"issuer_mode,omitempty"`
+	// (String)
+	InternalHost *string `json:"internalHost,omitempty" tf:"internal_host,omitempty"`
+
+	// (Boolean) Defaults to true.
+	// Defaults to `true`.
+	InternalHostSSLValidation *bool `json:"internalHostSslValidation,omitempty" tf:"internal_host_ssl_validation,omitempty"`
 
 	// (List of String) JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources []*string `json:"jwksSources,omitempty" tf:"jwks_sources,omitempty"`
+
+	// (String) Defaults to proxy.
+	// Defaults to `proxy`.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -110,27 +131,15 @@ type ProviderOAuth2Observation struct {
 	// (List of String)
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
 
-	// (List of String)
-	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
-
 	// (String) Defaults to days=30.
 	// Defaults to `days=30`.
 	RefreshTokenValidity *string `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
 	// (String)
-	SigningKey *string `json:"signingKey,omitempty" tf:"signing_key,omitempty"`
-
-	// (String) Defaults to hashed_user_id.
-	// Defaults to `hashed_user_id`.
-	SubMode *string `json:"subMode,omitempty" tf:"sub_mode,omitempty"`
+	SkipPathRegex *string `json:"skipPathRegex,omitempty" tf:"skip_path_regex,omitempty"`
 }
 
-type ProviderOAuth2Parameters struct {
-
-	// (String) Defaults to minutes=1.
-	// Defaults to `minutes=1`.
-	// +kubebuilder:validation:Optional
-	AccessCodeValidity *string `json:"accessCodeValidity,omitempty" tf:"access_code_validity,omitempty"`
+type ProxyParameters struct {
 
 	// (String) Defaults to minutes=10.
 	// Defaults to `minutes=10`.
@@ -155,34 +164,50 @@ type ProviderOAuth2Parameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationFlowSelector *v1.Selector `json:"authorizationFlowSelector,omitempty" tf:"-"`
 
+	// (Boolean) Defaults to false.
+	// Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	BasicAuthEnabled *bool `json:"basicAuthEnabled,omitempty" tf:"basic_auth_enabled,omitempty"`
+
 	// (String)
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	BasicAuthPasswordAttribute *string `json:"basicAuthPasswordAttribute,omitempty" tf:"basic_auth_password_attribute,omitempty"`
 
-	// (String, Sensitive) Generated.
-	// Generated.
+	// (String)
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	BasicAuthUsernameAttribute *string `json:"basicAuthUsernameAttribute,omitempty" tf:"basic_auth_username_attribute,omitempty"`
 
-	// (String) Defaults to confidential.
-	// Defaults to `confidential`.
+	// (String)
 	// +kubebuilder:validation:Optional
-	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
+	CookieDomain *string `json:"cookieDomain,omitempty" tf:"cookie_domain,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExternalHost *string `json:"externalHost,omitempty" tf:"external_host,omitempty"`
 
 	// (Boolean) Defaults to true.
 	// Defaults to `true`.
 	// +kubebuilder:validation:Optional
-	IncludeClaimsInIDToken *bool `json:"includeClaimsInIdToken,omitempty" tf:"include_claims_in_id_token,omitempty"`
+	InterceptHeaderAuth *bool `json:"interceptHeaderAuth,omitempty" tf:"intercept_header_auth,omitempty"`
 
-	// (String) Defaults to per_provider.
-	// Defaults to `per_provider`.
+	// (String)
 	// +kubebuilder:validation:Optional
-	IssuerMode *string `json:"issuerMode,omitempty" tf:"issuer_mode,omitempty"`
+	InternalHost *string `json:"internalHost,omitempty" tf:"internal_host,omitempty"`
+
+	// (Boolean) Defaults to true.
+	// Defaults to `true`.
+	// +kubebuilder:validation:Optional
+	InternalHostSSLValidation *bool `json:"internalHostSslValidation,omitempty" tf:"internal_host_ssl_validation,omitempty"`
 
 	// (List of String) JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	// +kubebuilder:validation:Optional
 	JwksSources []*string `json:"jwksSources,omitempty" tf:"jwks_sources,omitempty"`
+
+	// (String) Defaults to proxy.
+	// Defaults to `proxy`.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// (String)
 	// +kubebuilder:validation:Optional
@@ -192,10 +217,6 @@ type ProviderOAuth2Parameters struct {
 	// +kubebuilder:validation:Optional
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
 
-	// (List of String)
-	// +kubebuilder:validation:Optional
-	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
-
 	// (String) Defaults to days=30.
 	// Defaults to `days=30`.
 	// +kubebuilder:validation:Optional
@@ -203,18 +224,13 @@ type ProviderOAuth2Parameters struct {
 
 	// (String)
 	// +kubebuilder:validation:Optional
-	SigningKey *string `json:"signingKey,omitempty" tf:"signing_key,omitempty"`
-
-	// (String) Defaults to hashed_user_id.
-	// Defaults to `hashed_user_id`.
-	// +kubebuilder:validation:Optional
-	SubMode *string `json:"subMode,omitempty" tf:"sub_mode,omitempty"`
+	SkipPathRegex *string `json:"skipPathRegex,omitempty" tf:"skip_path_regex,omitempty"`
 }
 
-// ProviderOAuth2Spec defines the desired state of ProviderOAuth2
-type ProviderOAuth2Spec struct {
+// ProxySpec defines the desired state of Proxy
+type ProxySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProviderOAuth2Parameters `json:"forProvider"`
+	ForProvider     ProxyParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -226,50 +242,50 @@ type ProviderOAuth2Spec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ProviderOAuth2InitParameters `json:"initProvider,omitempty"`
+	InitProvider ProxyInitParameters `json:"initProvider,omitempty"`
 }
 
-// ProviderOAuth2Status defines the observed state of ProviderOAuth2.
-type ProviderOAuth2Status struct {
+// ProxyStatus defines the observed state of Proxy.
+type ProxyStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProviderOAuth2Observation `json:"atProvider,omitempty"`
+	AtProvider        ProxyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ProviderOAuth2 is the Schema for the ProviderOAuth2s API.
+// Proxy is the Schema for the Proxys API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,authentik}
-type ProviderOAuth2 struct {
+type Proxy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || (has(self.initProvider) && has(self.initProvider.clientId))",message="spec.forProvider.clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.externalHost) || (has(self.initProvider) && has(self.initProvider.externalHost))",message="spec.forProvider.externalHost is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	Spec   ProviderOAuth2Spec   `json:"spec"`
-	Status ProviderOAuth2Status `json:"status,omitempty"`
+	Spec   ProxySpec   `json:"spec"`
+	Status ProxyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ProviderOAuth2List contains a list of ProviderOAuth2s
-type ProviderOAuth2List struct {
+// ProxyList contains a list of Proxys
+type ProxyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ProviderOAuth2 `json:"items"`
+	Items           []Proxy `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	ProviderOAuth2_Kind             = "ProviderOAuth2"
-	ProviderOAuth2_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ProviderOAuth2_Kind}.String()
-	ProviderOAuth2_KindAPIVersion   = ProviderOAuth2_Kind + "." + CRDGroupVersion.String()
-	ProviderOAuth2_GroupVersionKind = CRDGroupVersion.WithKind(ProviderOAuth2_Kind)
+	Proxy_Kind             = "Proxy"
+	Proxy_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Proxy_Kind}.String()
+	Proxy_KindAPIVersion   = Proxy_Kind + "." + CRDGroupVersion.String()
+	Proxy_GroupVersionKind = CRDGroupVersion.WithKind(Proxy_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&ProviderOAuth2{}, &ProviderOAuth2List{})
+	SchemeBuilder.Register(&Proxy{}, &ProxyList{})
 }

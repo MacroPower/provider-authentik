@@ -46,9 +46,6 @@ type FlowInitParameters struct {
 	PolicyEngineMode *string `json:"policyEngineMode,omitempty" tf:"policy_engine_mode,omitempty"`
 
 	// (String)
-	Slug *string `json:"slug,omitempty" tf:"slug,omitempty"`
-
-	// (String)
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
@@ -86,9 +83,6 @@ type FlowObservation struct {
 	// (String) Defaults to any.
 	// Defaults to `any`.
 	PolicyEngineMode *string `json:"policyEngineMode,omitempty" tf:"policy_engine_mode,omitempty"`
-
-	// (String)
-	Slug *string `json:"slug,omitempty" tf:"slug,omitempty"`
 
 	// (String)
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
@@ -140,10 +134,6 @@ type FlowParameters struct {
 
 	// (String)
 	// +kubebuilder:validation:Optional
-	Slug *string `json:"slug,omitempty" tf:"slug,omitempty"`
-
-	// (String)
-	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
@@ -185,7 +175,6 @@ type Flow struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.designation) || (has(self.initProvider) && has(self.initProvider.designation))",message="spec.forProvider.designation is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.slug) || (has(self.initProvider) && has(self.initProvider.slug))",message="spec.forProvider.slug is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.title) || (has(self.initProvider) && has(self.initProvider.title))",message="spec.forProvider.title is a required parameter"
 	Spec   FlowSpec   `json:"spec"`
 	Status FlowStatus `json:"status,omitempty"`

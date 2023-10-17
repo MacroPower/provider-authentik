@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: applications.application.authentik.crossplane.io
+  name: samls.provider.authentik.crossplane.io
 spec:
-  group: application.authentik.crossplane.io
+  group: provider.authentik.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - authentik
-    kind: Application
-    listKind: ApplicationList
-    plural: applications
-    singular: application
+    kind: SAML
+    listKind: SAMLList
+    plural: samls
+    singular: saml
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Application is the Schema for the Applications API.
+        description: SAML is the Schema for the SAMLs API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ApplicationSpec defines the desired state of Application
+            description: SAMLSpec defines the desired state of SAML
             properties:
               deletionPolicy:
                 default: Delete
@@ -66,40 +66,26 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  acsUrl:
                     description: (String)
                     type: string
-                  metaDescription:
+                  assertionValidNotBefore:
+                    description: 5. Defaults to `minutes=-5`.
+                    type: string
+                  assertionValidNotOnOrAfter:
+                    description: (String) Defaults to minutes=5. Defaults to `minutes=5`.
+                    type: string
+                  audience:
+                    description: (String) Defaults to “. Defaults to “.
+                    type: string
+                  authenticationFlow:
                     description: (String)
                     type: string
-                  metaIcon:
+                  authorizationFlow:
                     description: (String)
                     type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
-                    type: string
-                  name:
-                    description: (String)
-                    type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
-                    type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  protocolProviderRef:
-                    description: Reference to a Proxy in provider to populate protocolProvider.
+                  authorizationFlowRef:
+                    description: Reference to a Flow in flow to populate authorizationFlow.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,8 +118,8 @@ spec:
                     required:
                     - name
                     type: object
-                  protocolProviderSelector:
-                    description: Selector for a Proxy in provider to populate protocolProvider.
+                  authorizationFlowSelector:
+                    description: Selector for a Flow in flow to populate authorizationFlow.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -171,8 +157,53 @@ spec:
                             type: string
                         type: object
                     type: object
-                  uuid:
+                  digestAlgorithm:
+                    description: (String) Defaults to http://www.w3.org/2001/04/xmlenc#sha256.
+                      Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+                    type: string
+                  issuer:
+                    description: (String) Defaults to authentik. Defaults to `authentik`.
+                    type: string
+                  name:
+                    description: (String)
+                    type: string
+                  nameIdMapping:
+                    description: (String)
+                    type: string
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  sessionValidNotOnOrAfter:
+                    description: (String) Defaults to minutes=86400. Defaults to `minutes=86400`.
+                    type: string
+                  signatureAlgorithm:
+                    description: more#rsa-sha256. Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+                    type: string
+                  signingKp:
+                    description: (String)
+                    type: string
+                  spBinding:
+                    description: (String) Defaults to redirect. Defaults to `redirect`.
+                    type: string
+                  urlSloPost:
                     description: (String) Generated. Generated.
+                    type: string
+                  urlSloRedirect:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoInit:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoPost:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoRedirect:
+                    description: (String) Generated. Generated.
+                    type: string
+                  verificationKp:
+                    description: (String)
                     type: string
                 type: object
               initProvider:
@@ -188,37 +219,68 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  acsUrl:
                     description: (String)
                     type: string
-                  metaDescription:
+                  assertionValidNotBefore:
+                    description: 5. Defaults to `minutes=-5`.
+                    type: string
+                  assertionValidNotOnOrAfter:
+                    description: (String) Defaults to minutes=5. Defaults to `minutes=5`.
+                    type: string
+                  audience:
+                    description: (String) Defaults to “. Defaults to “.
+                    type: string
+                  authenticationFlow:
                     description: (String)
                     type: string
-                  metaIcon:
-                    description: (String)
+                  digestAlgorithm:
+                    description: (String) Defaults to http://www.w3.org/2001/04/xmlenc#sha256.
+                      Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
                     type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
+                  issuer:
+                    description: (String) Defaults to authentik. Defaults to `authentik`.
                     type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
+                  nameIdMapping:
+                    description: (String)
                     type: string
-                  uuid:
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  sessionValidNotOnOrAfter:
+                    description: (String) Defaults to minutes=86400. Defaults to `minutes=86400`.
+                    type: string
+                  signatureAlgorithm:
+                    description: more#rsa-sha256. Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+                    type: string
+                  signingKp:
+                    description: (String)
+                    type: string
+                  spBinding:
+                    description: (String) Defaults to redirect. Defaults to `redirect`.
+                    type: string
+                  urlSloPost:
                     description: (String) Generated. Generated.
+                    type: string
+                  urlSloRedirect:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoInit:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoPost:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoRedirect:
+                    description: (String) Generated. Generated.
+                    type: string
+                  verificationKp:
+                    description: (String)
                     type: string
                 type: object
               managementPolicies:
@@ -383,52 +445,87 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
+            - message: spec.forProvider.acsUrl is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.acsUrl)
+                || (has(self.initProvider) && has(self.initProvider.acsUrl))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
           status:
-            description: ApplicationStatus defines the observed state of Application.
+            description: SAMLStatus defines the observed state of SAML.
             properties:
               atProvider:
                 properties:
-                  backchannelProviders:
-                    description: (List of Number)
-                    items:
-                      type: number
-                    type: array
-                  group:
+                  acsUrl:
                     description: (String)
+                    type: string
+                  assertionValidNotBefore:
+                    description: 5. Defaults to `minutes=-5`.
+                    type: string
+                  assertionValidNotOnOrAfter:
+                    description: (String) Defaults to minutes=5. Defaults to `minutes=5`.
+                    type: string
+                  audience:
+                    description: (String) Defaults to “. Defaults to “.
+                    type: string
+                  authenticationFlow:
+                    description: (String)
+                    type: string
+                  authorizationFlow:
+                    description: (String)
+                    type: string
+                  digestAlgorithm:
+                    description: (String) Defaults to http://www.w3.org/2001/04/xmlenc#sha256.
+                      Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
                     type: string
                   id:
                     description: (String) The ID of this resource.
                     type: string
-                  metaDescription:
-                    description: (String)
-                    type: string
-                  metaIcon:
-                    description: (String)
-                    type: string
-                  metaLaunchUrl:
-                    description: (String)
-                    type: string
-                  metaPublisher:
-                    description: (String)
+                  issuer:
+                    description: (String) Defaults to authentik. Defaults to `authentik`.
                     type: string
                   name:
                     description: (String)
                     type: string
-                  openInNewTab:
-                    description: (Boolean) Defaults to false. Defaults to `false`.
-                    type: boolean
-                  policyEngineMode:
-                    description: (String) Defaults to any. Defaults to `any`.
+                  nameIdMapping:
+                    description: (String)
                     type: string
-                  protocolProvider:
-                    description: (Number)
-                    type: number
-                  uuid:
+                  propertyMappings:
+                    description: (List of String)
+                    items:
+                      type: string
+                    type: array
+                  sessionValidNotOnOrAfter:
+                    description: (String) Defaults to minutes=86400. Defaults to `minutes=86400`.
+                    type: string
+                  signatureAlgorithm:
+                    description: more#rsa-sha256. Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+                    type: string
+                  signingKp:
+                    description: (String)
+                    type: string
+                  spBinding:
+                    description: (String) Defaults to redirect. Defaults to `redirect`.
+                    type: string
+                  urlSloPost:
                     description: (String) Generated. Generated.
+                    type: string
+                  urlSloRedirect:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoInit:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoPost:
+                    description: (String) Generated. Generated.
+                    type: string
+                  urlSsoRedirect:
+                    description: (String) Generated. Generated.
+                    type: string
+                  verificationKp:
+                    description: (String)
                     type: string
                 type: object
               conditions:

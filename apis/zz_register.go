@@ -12,6 +12,7 @@ import (
 
 	v1alpha1 "github.com/MacroPower/provider-authentik/apis/application/v1alpha1"
 	v1alpha1flow "github.com/MacroPower/provider-authentik/apis/flow/v1alpha1"
+	v1alpha1provider "github.com/MacroPower/provider-authentik/apis/provider/v1alpha1"
 	v1alpha1apis "github.com/MacroPower/provider-authentik/apis/v1alpha1"
 	v1beta1 "github.com/MacroPower/provider-authentik/apis/v1beta1"
 )
@@ -21,6 +22,7 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1flow.SchemeBuilder.AddToScheme,
+		v1alpha1provider.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 	)
