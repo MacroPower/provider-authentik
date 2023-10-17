@@ -1,0 +1,29 @@
+apiVersion: directory.authentik.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directory/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: group
+  name: group
+spec:
+  forProvider:
+    isSuperuser: true
+    name: tf_admins
+    usersRefs:
+    - name: name
+
+---
+
+apiVersion: directory.authentik.crossplane.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directory/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    name: User
+    username: user

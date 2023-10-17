@@ -11,6 +11,9 @@ import (
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/MacroPower/provider-authentik/config/application"
+	"github.com/MacroPower/provider-authentik/config/blueprint"
+	"github.com/MacroPower/provider-authentik/config/customization"
+	"github.com/MacroPower/provider-authentik/config/directory"
 	"github.com/MacroPower/provider-authentik/config/flow"
 	"github.com/MacroPower/provider-authentik/config/provider"
 )
@@ -39,6 +42,9 @@ func GetProvider() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		application.Configure,
+		blueprint.Configure,
+		customization.Configure,
+		directory.Configure,
 		flow.Configure,
 		provider.Configure,
 	} {

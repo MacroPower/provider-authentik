@@ -7,6 +7,7 @@ package v1alpha1
 
 import (
 	"context"
+	v1alpha11 "github.com/MacroPower/provider-authentik/apis/customization/v1alpha1"
 	v1alpha1 "github.com/MacroPower/provider-authentik/apis/flow/v1alpha1"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
@@ -19,6 +20,7 @@ func (mg *OAuth2) ResolveReferences(ctx context.Context, c client.Reader) error 
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -36,6 +38,22 @@ func (mg *OAuth2) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.AuthorizationFlow = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AuthorizationFlowRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PropertyMappings),
+		Extract:       resource.ExtractParamPath("id", true),
+		References:    mg.Spec.ForProvider.PropertyMappingsRefs,
+		Selector:      mg.Spec.ForProvider.PropertyMappingsSelector,
+		To: reference.To{
+			List:    &v1alpha11.ScopeMappingList{},
+			Managed: &v1alpha11.ScopeMapping{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PropertyMappings")
+	}
+	mg.Spec.ForProvider.PropertyMappings = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.PropertyMappingsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

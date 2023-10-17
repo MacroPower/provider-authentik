@@ -11,6 +11,9 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 
 	v1alpha1 "github.com/MacroPower/provider-authentik/apis/application/v1alpha1"
+	v1alpha1blueprint "github.com/MacroPower/provider-authentik/apis/blueprint/v1alpha1"
+	v1alpha1customization "github.com/MacroPower/provider-authentik/apis/customization/v1alpha1"
+	v1alpha1directory "github.com/MacroPower/provider-authentik/apis/directory/v1alpha1"
 	v1alpha1flow "github.com/MacroPower/provider-authentik/apis/flow/v1alpha1"
 	v1alpha1provider "github.com/MacroPower/provider-authentik/apis/provider/v1alpha1"
 	v1alpha1apis "github.com/MacroPower/provider-authentik/apis/v1alpha1"
@@ -21,6 +24,9 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1blueprint.SchemeBuilder.AddToScheme,
+		v1alpha1customization.SchemeBuilder.AddToScheme,
+		v1alpha1directory.SchemeBuilder.AddToScheme,
 		v1alpha1flow.SchemeBuilder.AddToScheme,
 		v1alpha1provider.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,

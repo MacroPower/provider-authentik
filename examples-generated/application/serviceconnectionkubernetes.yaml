@@ -1,0 +1,12 @@
+apiVersion: application.authentik.crossplane.io/v1alpha1
+kind: ServiceConnectionKubernetes
+metadata:
+  annotations:
+    meta.upbound.io/example-id: application/v1alpha1/serviceconnectionkubernetes
+  labels:
+    testing.upbound.io/example-name: local
+  name: local
+spec:
+  forProvider:
+    local: true
+    name: local

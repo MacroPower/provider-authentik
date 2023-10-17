@@ -49,9 +49,6 @@ type OAuth2InitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (List of String)
-	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
-
-	// (List of String)
 	RedirectUris []*string `json:"redirectUris,omitempty" tf:"redirect_uris,omitempty"`
 
 	// (String) Defaults to days=30.
@@ -189,8 +186,18 @@ type OAuth2Parameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (List of String)
+	// +crossplane:generate:reference:type=github.com/MacroPower/provider-authentik/apis/customization/v1alpha1.ScopeMapping
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)
 	// +kubebuilder:validation:Optional
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
+
+	// References to ScopeMapping in customization to populate propertyMappings.
+	// +kubebuilder:validation:Optional
+	PropertyMappingsRefs []v1.Reference `json:"propertyMappingsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ScopeMapping in customization to populate propertyMappings.
+	// +kubebuilder:validation:Optional
+	PropertyMappingsSelector *v1.Selector `json:"propertyMappingsSelector,omitempty" tf:"-"`
 
 	// (List of String)
 	// +kubebuilder:validation:Optional

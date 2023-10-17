@@ -22,6 +22,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "OAuth2"
 
 		r.References["authorization_flow"] = flowUUIDRef
+		r.References["property_mappings"] = config.Reference{
+			Type:      "github.com/MacroPower/provider-authentik/apis/customization/v1alpha1.ScopeMapping",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)`,
+		}
 	})
 	p.AddResourceConfigurator("authentik_provider_proxy", func(r *config.Resource) {
 		r.ShortGroup = shortGroup

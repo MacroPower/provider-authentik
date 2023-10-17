@@ -403,17 +403,6 @@ func (in *OAuth2InitParameters) DeepCopyInto(out *OAuth2InitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PropertyMappings != nil {
-		in, out := &in.PropertyMappings, &out.PropertyMappings
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.RedirectUris != nil {
 		in, out := &in.RedirectUris, &out.RedirectUris
 		*out = make([]*string, len(*in))
@@ -681,6 +670,18 @@ func (in *OAuth2Parameters) DeepCopyInto(out *OAuth2Parameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.PropertyMappingsRefs != nil {
+		in, out := &in.PropertyMappingsRefs, &out.PropertyMappingsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.PropertyMappingsSelector != nil {
+		in, out := &in.PropertyMappingsSelector, &out.PropertyMappingsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RedirectUris != nil {
 		in, out := &in.RedirectUris, &out.RedirectUris
