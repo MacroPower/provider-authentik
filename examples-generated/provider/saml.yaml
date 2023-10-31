@@ -27,6 +27,4 @@ metadata:
 spec:
   forProvider:
     name: test-app
-    protocolProviderSelector:
-      matchLabels:
-        testing.upbound.io/example-name: name
+    protocolProvider: ${authentik_provider_saml.name.id}

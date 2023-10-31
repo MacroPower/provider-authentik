@@ -94,6 +94,11 @@ func (in *ApplicationInitParameters) DeepCopyInto(out *ApplicationInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProtocolProvider != nil {
+		in, out := &in.ProtocolProvider, &out.ProtocolProvider
+		*out = new(float64)
+		**out = **in
+	}
 	if in.UUID != nil {
 		in, out := &in.UUID, &out.UUID
 		*out = new(string)
@@ -282,16 +287,6 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 		in, out := &in.ProtocolProvider, &out.ProtocolProvider
 		*out = new(float64)
 		**out = **in
-	}
-	if in.ProtocolProviderRef != nil {
-		in, out := &in.ProtocolProviderRef, &out.ProtocolProviderRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ProtocolProviderSelector != nil {
-		in, out := &in.ProtocolProviderSelector, &out.ProtocolProviderSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.UUID != nil {
 		in, out := &in.UUID, &out.UUID

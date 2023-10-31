@@ -31,6 +31,4 @@ metadata:
 spec:
   forProvider:
     name: radius-app
-    protocolProviderSelector:
-      matchLabels:
-        testing.upbound.io/example-name: name
+    protocolProvider: ${authentik_provider_radius.name.id}
