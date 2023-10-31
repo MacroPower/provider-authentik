@@ -1,0 +1,12 @@
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: UserWrite
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/userwrite
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    createUsersAsInactive: false
+    name: user-write

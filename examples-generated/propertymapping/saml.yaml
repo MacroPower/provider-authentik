@@ -1,0 +1,13 @@
+apiVersion: propertymapping.authentik.crossplane.io/v1alpha1
+kind: SAML
+metadata:
+  annotations:
+    meta.upbound.io/example-id: propertymapping/v1alpha1/saml
+  labels:
+    testing.upbound.io/example-name: saml-aws-rolessessionname
+  name: saml-aws-rolessessionname
+spec:
+  forProvider:
+    expression: return user.email
+    name: SAML AWS RoleSessionName
+    samlName: https://aws.amazon.com/SAML/Attributes/RoleSessionName

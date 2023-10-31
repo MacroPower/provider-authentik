@@ -5,7 +5,7 @@ import "github.com/upbound/upjet/pkg/config"
 const shortGroup = "provider"
 
 var flowUUIDRef = config.Reference{
-	Type:      "github.com/MacroPower/provider-authentik/apis/flow/v1alpha1.Flow",
+	Type:      "github.com/MacroPower/provider-authentik/apis/authentik/v1alpha1.Flow",
 	Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("uuid",true)`,
 }
 
@@ -23,7 +23,7 @@ func Configure(p *config.Provider) {
 
 		r.References["authorization_flow"] = flowUUIDRef
 		r.References["property_mappings"] = config.Reference{
-			Type:      "github.com/MacroPower/provider-authentik/apis/customization/v1alpha1.ScopeMapping",
+			Type:      "github.com/MacroPower/provider-authentik/apis/authentik/v1alpha1.ScopeMapping",
 			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})

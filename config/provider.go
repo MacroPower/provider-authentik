@@ -10,12 +10,12 @@ import (
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
-	"github.com/MacroPower/provider-authentik/config/application"
-	"github.com/MacroPower/provider-authentik/config/blueprint"
-	"github.com/MacroPower/provider-authentik/config/customization"
+	"github.com/MacroPower/provider-authentik/config/base"
 	"github.com/MacroPower/provider-authentik/config/directory"
-	"github.com/MacroPower/provider-authentik/config/flow"
+	"github.com/MacroPower/provider-authentik/config/policy"
+	"github.com/MacroPower/provider-authentik/config/propertymapping"
 	"github.com/MacroPower/provider-authentik/config/provider"
+	"github.com/MacroPower/provider-authentik/config/stage"
 )
 
 const (
@@ -41,12 +41,12 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		application.Configure,
-		blueprint.Configure,
-		customization.Configure,
+		base.Configure,
 		directory.Configure,
-		flow.Configure,
+		policy.Configure,
+		propertymapping.Configure,
 		provider.Configure,
+		stage.Configure,
 	} {
 		configure(pc)
 	}

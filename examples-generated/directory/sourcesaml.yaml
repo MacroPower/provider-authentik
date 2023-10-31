@@ -1,0 +1,22 @@
+apiVersion: directory.authentik.crossplane.io/v1alpha1
+kind: SourceSAML
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directory/v1alpha1/sourcesaml
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    authenticationFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    enrollmentFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    name: test-source
+    preAuthenticationFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    slug: test-source
+    ssoUrl: http://localhost

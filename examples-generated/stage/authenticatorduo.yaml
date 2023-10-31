@@ -1,0 +1,17 @@
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: AuthenticatorDuo
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/authenticatorduo
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    apiHostname: http://foo.bar.baz
+    clientId: foo
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    name: duo-setup

@@ -1,0 +1,29 @@
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: Prompt
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/prompt
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    fields:
+    - ${resource.authentik_stage_prompt_field.field.id}
+    name: test
+
+---
+
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: PromptField
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/prompt
+  labels:
+    testing.upbound.io/example-name: field
+  name: field
+spec:
+  forProvider:
+    fieldKey: username
+    label: Username
+    type: username

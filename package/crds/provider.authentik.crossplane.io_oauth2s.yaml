@@ -79,7 +79,7 @@ spec:
                     description: (String)
                     type: string
                   authorizationFlowRef:
-                    description: Reference to a Flow in flow to populate authorizationFlow.
+                    description: Reference to a Flow in authentik to populate authorizationFlow.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   authorizationFlowSelector:
-                    description: Selector for a Flow in flow to populate authorizationFlow.
+                    description: Selector for a Flow in authentik to populate authorizationFlow.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -198,7 +198,7 @@ spec:
                       type: string
                     type: array
                   propertyMappingsRefs:
-                    description: References to ScopeMapping in customization to populate
+                    description: References to ScopeMapping in authentik to populate
                       propertyMappings.
                     items:
                       description: A Reference to a named object.
@@ -236,7 +236,7 @@ spec:
                       type: object
                     type: array
                   propertyMappingsSelector:
-                    description: Selector for a list of ScopeMapping in customization
+                    description: Selector for a list of ScopeMapping in authentik
                       to populate propertyMappings.
                     properties:
                       matchControllerRef:

@@ -139,16 +139,16 @@ type OAuth2Parameters struct {
 	AuthenticationFlow *string `json:"authenticationFlow,omitempty" tf:"authentication_flow,omitempty"`
 
 	// (String)
-	// +crossplane:generate:reference:type=github.com/MacroPower/provider-authentik/apis/flow/v1alpha1.Flow
+	// +crossplane:generate:reference:type=github.com/MacroPower/provider-authentik/apis/authentik/v1alpha1.Flow
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("uuid",true)
 	// +kubebuilder:validation:Optional
 	AuthorizationFlow *string `json:"authorizationFlow,omitempty" tf:"authorization_flow,omitempty"`
 
-	// Reference to a Flow in flow to populate authorizationFlow.
+	// Reference to a Flow in authentik to populate authorizationFlow.
 	// +kubebuilder:validation:Optional
 	AuthorizationFlowRef *v1.Reference `json:"authorizationFlowRef,omitempty" tf:"-"`
 
-	// Selector for a Flow in flow to populate authorizationFlow.
+	// Selector for a Flow in authentik to populate authorizationFlow.
 	// +kubebuilder:validation:Optional
 	AuthorizationFlowSelector *v1.Selector `json:"authorizationFlowSelector,omitempty" tf:"-"`
 
@@ -186,16 +186,16 @@ type OAuth2Parameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (List of String)
-	// +crossplane:generate:reference:type=github.com/MacroPower/provider-authentik/apis/customization/v1alpha1.ScopeMapping
+	// +crossplane:generate:reference:type=github.com/MacroPower/provider-authentik/apis/authentik/v1alpha1.ScopeMapping
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)
 	// +kubebuilder:validation:Optional
 	PropertyMappings []*string `json:"propertyMappings,omitempty" tf:"property_mappings,omitempty"`
 
-	// References to ScopeMapping in customization to populate propertyMappings.
+	// References to ScopeMapping in authentik to populate propertyMappings.
 	// +kubebuilder:validation:Optional
 	PropertyMappingsRefs []v1.Reference `json:"propertyMappingsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of ScopeMapping in customization to populate propertyMappings.
+	// Selector for a list of ScopeMapping in authentik to populate propertyMappings.
 	// +kubebuilder:validation:Optional
 	PropertyMappingsSelector *v1.Selector `json:"propertyMappingsSelector,omitempty" tf:"-"`
 

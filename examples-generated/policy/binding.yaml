@@ -1,0 +1,42 @@
+apiVersion: policy.authentik.crossplane.io/v1alpha1
+kind: Binding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policy/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: app-access
+  name: app-access
+spec:
+  forProvider:
+    order: 0
+    policy: ${authentik_policy_expression.policy.id}
+    target: ${authentik_application.name.uuid}
+
+---
+
+apiVersion: authentik.crossplane.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policy/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    name: test app
+
+---
+
+apiVersion: policy.authentik.crossplane.io/v1alpha1
+kind: Expression
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policy/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+spec:
+  forProvider:
+    expression: return True
+    name: example

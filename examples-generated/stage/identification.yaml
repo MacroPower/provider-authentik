@@ -1,0 +1,59 @@
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: Identification
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/identification
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    name: test-ident
+    passwordStage: ${authentik_stage_password.name.id}
+    sources:
+    - ${authentik_source_oauth.name.uuid}
+    userFields:
+    - username
+
+---
+
+apiVersion: directory.authentik.crossplane.io/v1alpha1
+kind: SourceOAuth
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/identification
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    authenticationFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    consumerKey: foo
+    consumerSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    enrollmentFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    name: test
+    providerType: discord
+    slug: test
+
+---
+
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: Password
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stage/v1alpha1/identification
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    backends:
+    - authentik.core.auth.InbuiltBackend
+    name: test-pass

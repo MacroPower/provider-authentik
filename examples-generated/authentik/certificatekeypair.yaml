@@ -1,0 +1,16 @@
+apiVersion: authentik.crossplane.io/v1alpha1
+kind: CertificateKeyPair
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authentik/v1alpha1/certificatekeypair
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    certificateData: ${tls_self_signed_cert.example.cert_pem}
+    keyDataSecretRef:
+      key: attribute.private_key_pem
+      name: example-private-key
+      namespace: upbound-system
+    name: keypair

@@ -1,0 +1,24 @@
+apiVersion: directory.authentik.crossplane.io/v1alpha1
+kind: SourceOAuth
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directory/v1alpha1/sourceoauth
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    authenticationFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    consumerKey: foo
+    consumerSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    enrollmentFlowSelector:
+      matchLabels:
+        testing.upbound.io/example-name: authentik_flow
+    name: discord
+    providerType: discord
+    slug: discord

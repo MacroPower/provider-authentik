@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: application.authentik.crossplane.io/v1alpha1
+apiVersion: authentik.crossplane.io/v1alpha1
 kind: Application
 metadata:
   annotations:

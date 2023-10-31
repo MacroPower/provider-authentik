@@ -1,0 +1,43 @@
+apiVersion: authentik.crossplane.io/v1alpha1
+kind: FlowStageBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authentik/v1alpha1/flowstagebinding
+  labels:
+    testing.upbound.io/example-name: dummy-flow
+  name: dummy-flow
+spec:
+  forProvider:
+    order: 0
+    stage: ${authentik_stage_dummy.name.id}
+    target: ${authentik_flow.flow.uuid}
+
+---
+
+apiVersion: authentik.crossplane.io/v1alpha1
+kind: Flow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: /v1alpha1/flowstagebinding
+  labels:
+    testing.upbound.io/example-name: flow
+  name: flow
+spec:
+  forProvider:
+    designation: authorization
+    name: test-flow
+    title: Test flow
+
+---
+
+apiVersion: stage.authentik.crossplane.io/v1alpha1
+kind: Dummy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: /v1alpha1/flowstagebinding
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    name: test-stage

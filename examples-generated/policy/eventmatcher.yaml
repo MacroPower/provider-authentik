@@ -1,0 +1,14 @@
+apiVersion: policy.authentik.crossplane.io/v1alpha1
+kind: EventMatcher
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policy/v1alpha1/eventmatcher
+  labels:
+    testing.upbound.io/example-name: name
+  name: name
+spec:
+  forProvider:
+    action: login
+    app: authentik.events
+    clientIp: 1.2.3.4
+    name: login-from-1.2.3.4

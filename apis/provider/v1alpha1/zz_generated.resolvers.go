@@ -7,8 +7,7 @@ package v1alpha1
 
 import (
 	"context"
-	v1alpha11 "github.com/MacroPower/provider-authentik/apis/customization/v1alpha1"
-	v1alpha1 "github.com/MacroPower/provider-authentik/apis/flow/v1alpha1"
+	v1alpha1 "github.com/MacroPower/provider-authentik/apis/authentik/v1alpha1"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -45,8 +44,8 @@ func (mg *OAuth2) ResolveReferences(ctx context.Context, c client.Reader) error 
 		References:    mg.Spec.ForProvider.PropertyMappingsRefs,
 		Selector:      mg.Spec.ForProvider.PropertyMappingsSelector,
 		To: reference.To{
-			List:    &v1alpha11.ScopeMappingList{},
-			Managed: &v1alpha11.ScopeMapping{},
+			List:    &v1alpha1.ScopeMappingList{},
+			Managed: &v1alpha1.ScopeMapping{},
 		},
 	})
 	if err != nil {
