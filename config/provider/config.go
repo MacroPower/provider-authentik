@@ -9,7 +9,7 @@ var flowUUIDRef = config.Reference{
 	Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("uuid",true)`,
 }
 
-// Configure configures individual resources by adding custom ResourceConfigurators.
+// Configure configures the provider provider.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("authentik_provider_ldap", func(r *config.Resource) {
 		r.ShortGroup = shortGroup

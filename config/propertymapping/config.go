@@ -4,6 +4,7 @@ import "github.com/upbound/upjet/pkg/config"
 
 const shortGroup = "propertymapping"
 
+// Configure configures the propertymapping provider.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("authentik_property_mapping_ldap", func(r *config.Resource) {
 		r.ShortGroup = shortGroup

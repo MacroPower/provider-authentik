@@ -4,6 +4,7 @@ import "github.com/upbound/upjet/pkg/config"
 
 const shortGroup = "policy"
 
+// Configure configures the policy provider.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("authentik_policy_binding", func(r *config.Resource) {
 		r.ShortGroup = shortGroup

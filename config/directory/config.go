@@ -9,6 +9,7 @@ var flowUUIDRef = config.Reference{
 	Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("uuid",true)`,
 }
 
+// Configure configures the directory provider.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("authentik_user", func(r *config.Resource) {
 		r.ShortGroup = shortGroup

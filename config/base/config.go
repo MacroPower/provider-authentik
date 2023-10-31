@@ -4,6 +4,7 @@ import "github.com/upbound/upjet/pkg/config"
 
 const shortGroup = ""
 
+// Configure configures the base provider.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("authentik_application", func(r *config.Resource) {
 		r.ShortGroup = shortGroup

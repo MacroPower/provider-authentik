@@ -4,6 +4,7 @@ import "github.com/upbound/upjet/pkg/config"
 
 const shortGroup = "stage"
 
+// Configure configures the stage provider.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("authentik_stage_authenticator_duo", func(r *config.Resource) {
 		r.ShortGroup = shortGroup
