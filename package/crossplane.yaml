@@ -2,3 +2,15 @@ apiVersion: meta.pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-authentik
+  annotations:
+    meta.crossplane.io/maintainer: Jacob Colvin <jacobcolvin1@gmail.com>
+    meta.crossplane.io/source: github.com/MacroPower/provider-authentik
+    meta.crossplane.io/license: Apache-2.0
+    meta.crossplane.io/description: |
+      Crossplane provider to manage Authentik resources.
+    meta.crossplane.io/readme: |
+      Provider Authentik is a Crossplane provider for [Authentik](https://goauthentik.io/), generated from
+      [terraform-provider-authentik](https://github.com/goauthentik/terraform-provider-authentik) using
+      [Upjet](https://github.com/crossplane/upjet).
+    friendly-name.meta.crossplane.io: Provider Authentik
+    auth.upbound.io/group: authentik.crossplane.io
